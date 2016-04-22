@@ -1,0 +1,34 @@
+{
+  "name": "cc-form",
+  "version": "1.0.0",
+  "authors": [
+    "Keith Hill <keith@dexs.ca>"
+  ],
+  "description": "A credit card form using Polymer Gold Elements",
+  "keywords": [
+    "web-component",
+    "web-components",
+    "polymer",
+    "seed",
+    "credit-card"
+  ],
+  "main": "cc-form.html",
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/vic10us/cc-form/",
+  "ignore": [
+    "/.*",
+    "/test/",
+    "/demo/"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.0.0",
+    "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^1.0.8",
+    "gold-cc-input": "PolymerElements/gold-cc-input#^1.0.7",
+    "gold-cc-expiration-input": "PolymerElements/gold-cc-expiration-input#^1.1.2",
+    "paper-input": "PolymerElements/paper-input#^1.1.11"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
+    "web-component-tester": "*"
+  }
+}
