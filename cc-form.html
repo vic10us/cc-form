@@ -1,0 +1,145 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../gold-cc-expiration-input/gold-cc-expiration-input.html">
+<link rel="import" href="../gold-cc-cvc-input/gold-cc-cvc-input.html">
+<link rel="import" href="../gold-cc-input/gold-cc-input.html">
+<link rel="import" href="cc-form.html">
+<link rel="import" href="cc-styles.html">
+
+<!--
+An element providing a solution to no problem in particular.
+
+Example:
+
+    <cc-form></cc-form>
+
+@demo
+-->
+
+<dom-module id="cc-form">
+
+  <style>
+    :host {
+      display: block;
+      box-sizing: border-box;
+    }
+  </style>
+  
+  <template>
+    
+    
+    <style include="cc-styles"></style>
+    <div class="cc-card-container">
+      <div class$="{{_ccClass(cardType,showBack)}}">
+        <div class="cc-card-front">
+          <div class="cc-card-logo cc-card-elo">
+            <div class="e">e</div>
+            <div class="l">l</div>
+            <div class="o">o</div>
+          </div>
+          <div class="cc-card-logo cc-card-visa">visa</div>
+          <div class="cc-card-logo cc-card-mastercard">MasterCard</div>
+          <div class="cc-card-logo cc-card-maestro">Maestro</div>
+          <div class="cc-card-logo cc-card-amex"></div>
+          <div class="cc-card-logo cc-card-discover">discover</div>
+          <div class="cc-card-logo cc-card-dankort">
+            <div class="dk">
+              <div class="d"></div>
+              <div class="k"></div>
+            </div>
+          </div>
+          <div class="cc-card-lower">
+            <div class="cc-card-shiny"></div>
+            <div class="cc-card-cvc cc-card-display">&bull;&bull;&bull;</div>
+            <div class="cc-card-number cc-card-display"><span>{{creditCard}}</span></div>
+            <div class="cc-card-name cc-card-display"><span>{{fullName}}</span></div>
+            <div class="cc-card-expiry cc-card-display" data-before="month/year" data-after="validthru">{{expiryDate}}</div>
+          </div>
+        </div>
+        <div class="cc-card-back">
+          <div class="cc-card-bar"></div>
+          <div class="cc-card-cvc cc-card-display">{{cvc}}</div>
+          <div class="cc-card-shiny"></div>
+        </div>
+      </div>
+    </div>
+    
+    <paper-input value="{{fullName}}"></paper-input>
+    <gold-cc-input id="creditCard" aauto-validate required label="Auto-validating" value="{{creditCard}}" card-type="{{cardType}}"></gold-cc-input>
+    <gold-cc-expiration-input aauto-validate value="{{expiryDate}}"></gold-cc-expiration-input>
+    <gold-cc-cvc-input card-type="{{cardType}}" on-focus="_enteredCvc" on-blur="_exitedCvc" value="{{cvc}}"></gold-cc-cvc-input>
+
+  </template>
+
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'cc-form',
+
+    properties: {
+      fullName: {
+        type: String,
+        value: 'Full Name'
+      },
+      creditCard: {
+        type: String,
+        value: '•••• •••• •••• 0008'
+      },
+      expiryDate: {
+        type: String,
+        value: '11/18'
+      },
+      cardType: {
+        type: String,
+        value: 'mastercard'
+      },
+      cvc: {
+        type: Number,
+        value: '•••'
+      },
+      _showBack: {
+        type: Boolean,
+        value: false
+      }
+    },
+    _enteredCvc: function() {
+      this._showBack = true;
+    },
+    _exitedCvc: function() {
+      this._showBack = false;
+    },
+    _ccClass: function(cardType,showBack) {
+      var classes = 'cc-card';
+      if (!!cardType) {
+        classes += ' cc-card-identified cc-card-' + cardType;
+      }
+      if (!!showBack) {
+        classes += ' cc-card-flipped';
+      }
+      return classes;
+    },
+    observers: [],
+    // Element Lifecycle
+
+    ready: function() {
+    },
+
+    attached: function() {
+    },
+
+    detached: function() {
+    },
+
+  });
+
+</script>
