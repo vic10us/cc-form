@@ -4,6 +4,7 @@
 
 An element providing a starting point for your own reusable Polymer elements.
 
+_[Demo and API docs](https://vic10us.github.io/cc-form/)_
 
 ## Dependencies
 
