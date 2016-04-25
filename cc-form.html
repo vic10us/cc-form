@@ -11,11 +11,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../gold-cc-expiration-input/gold-cc-expiration-input.html">
 <link rel="import" href="../gold-cc-cvc-input/gold-cc-cvc-input.html">
 <link rel="import" href="../gold-cc-input/gold-cc-input.html">
+<link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="cc-form.html">
 <link rel="import" href="cc-styles.html">
 
 <!--
-An element providing a solution to no problem in particular.
+An element providing a cool credit card form with validation and Card Preview
 
 Example:
 
@@ -54,14 +55,16 @@ Example:
         </div>
       </div>
     </div>
-   
-    <paper-input value="{{fullName}}"></paper-input>
-    <gold-cc-input id="creditCard" aauto-validate required label="Auto-validating" value="{{creditCard}}" card-type="{{cardType}}"></gold-cc-input>
-    <gold-cc-expiration-input aauto-validate value="{{expiryDate}}"></gold-cc-expiration-input>
-    <gold-cc-cvc-input card-type="{{cardType}}" on-focus="_enteredCvc" on-blur="_exitedCvc" value="{{cvc}}"></gold-cc-cvc-input>
+
+    <div>
+      <paper-input value="{{fullName}}">&nbsp;</paper-input>
+      <gold-cc-input auto-validate$="[[autoValidate]]" required value="{{creditCard}}" card-type="{{cardType}}"></gold-cc-input>
+      <gold-cc-expiration-input auto-validate$="[[autoValidate]]" value="{{expiryDate}}"></gold-cc-expiration-input>
+      <gold-cc-cvc-input auto-validate$="[[autoValidate]]" card-type="[[cardType]]" on-focus="_enteredCvc" on-blur="_exitedCvc" value="{{cvc}}"></gold-cc-cvc-input>
+    </div>
 
   </template>
-
+  
 </dom-module>
 
 <script>
@@ -70,35 +73,58 @@ Example:
     is: 'cc-form',
 
     properties: {
+      
+      /**
+       * Set to true to auto-validate the credit card input values.
+       */
+      autoValidate: {
+        type: Boolean,
+        value: false
+      },
+      /**
+       * Full name on the Credit Card 
+       */
       fullName: {
         type: String,
-        value: 'Full Name',
-        notify: true
+        value: ''
       },
+      /**
+       * Credit Card number 
+       */
       creditCard: {
         type: String,
-        value: '•••• •••• •••• 0008',
-        notify: true
+        value: ''
       },
+      /**
+       * Credit Card expiry date in the format: `[MM/YY]`
+       */
       expiryDate: {
         type: String,
-        value: '11/18',
-        notify: true
+        value: ''
       },
+      /**
+       * Credit Card Type 
+       *  Possible valid values
+       * - mastercard
+       * - visa
+       * - amex
+       * - discover 
+       */
       cardType: {
         type: String,
-        value: 'mastercard',
-        notify: true
+        value: ''
       },
+      /**
+       * Credit Card CVC (Card Verification Code) 
+       */
       cvc: {
-        type: Number,
-        value: '•••',
-        notify: true
+        type: String,
+        value: ''
       },
       _showBack: {
         type: Boolean,
         value: false,
-        notify: true
+        readonly: true
       }
     },
     _logoClass: function(cardType) {
