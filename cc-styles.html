@@ -86,47 +86,9 @@
                 font-size: 4px;
                 font-weight: bold;
                 color: white;
-                background-image: repeating-radial-gradient(circle at center, #FFF 1px, #999 2px);
-                background-image: repeating-radial-gradient(circle at center, #FFF 1px, #999 2px);
+                background-image: url('../gold-cc-input/images/amex.png');
+                background-size: 60px 36px;
                 border: 1px solid #EEE;
-            }
-            
-            .cc-card-logo.cc-card-amex:before,
-            .cc-card-logo.cc-card-amex:after {
-                width: 28px;
-                display: block;
-                position: absolute;
-                left: 16px;
-            }
-            
-            .cc-card-logo.cc-card-amex:before {
-                height: 28px;
-                content: "american";
-                top: 3px;
-                text-align: left;
-                padding-left: 2px;
-                padding-top: 11px;
-                background: #267AC3;
-            }
-            
-            .cc-card-logo.cc-card-amex:after {
-                content: "express";
-                bottom: 11px;
-                text-align: right;
-                padding-right: 2px;
-            }
-            
-            .cc-card.cc-card-amex.cc-card-flipped {
-                -webkit-transform: none;
-                -moz-transform: none;
-                -ms-transform: none;
-                -o-transform: none;
-                transform: none;
-            }
-            
-            .cc-card.cc-card-amex.cc-card-identified .cc-card-front:before,
-            .cc-card.cc-card-amex.cc-card-identified .cc-card-back:before {
-                background-color: #108168;
             }
             
             .cc-card.cc-card-amex.cc-card-identified .cc-card-front .cc-card-logo.cc-card-amex {
@@ -142,55 +104,14 @@
             }
             
             .cc-card-logo.cc-card-discover {
-                background: #FF6600;
-                color: #111;
-                text-transform: uppercase;
-                font-style: normal;
-                font-weight: bold;
-                font-size: 10px;
                 text-align: center;
                 overflow: hidden;
                 z-index: 0;
                 padding-top: 9px;
                 letter-spacing: .03em;
                 border: 1px solid #EEE;
-            }
-            
-            .cc-card-logo.cc-card-discover:before,
-            .cc-card-logo.cc-card-discover:after {
-                content: " ";
-                display: block;
-                position: absolute;
-            }
-            
-            .cc-card-logo.cc-card-discover:before {
-                background: white;
-                width: 200px;
-                height: 200px;
-                border-radius: 200px;
-                bottom: -5%;
-                right: -80%;
-                z-index: -1;
-            }
-            
-            .cc-card-logo.cc-card-discover:after {
-                width: 8px;
-                height: 8px;
-                border-radius: 4px;
-                top: 10px;
-                left: 27px;
-                background-color: #FF6600;
-                background-image: -webkit-radial-gradient(#FF6600, #fff);
-                background-image: radial-gradient( #FF6600, #fff);
-                content: "network";
-                font-size: 4px;
-                line-height: 24px;
-                text-indent: -7px;
-            }
-            
-            .cc-card .cc-card-front .cc-card-logo.cc-card-discover {
-                right: 12%;
-                top: 18%;
+                background-image: url('../gold-cc-input/images/discover.png');
+                background-size: 60px 36px;
             }
             
             .cc-card.cc-card-discover.cc-card-identified .cc-card-front:before,
@@ -202,25 +123,6 @@
                 opacity: 1;
             }
             
-            .cc-card.cc-card-discover.cc-card-identified .cc-card-front:after {
-                -webkit-transition: 400ms;
-                -moz-transition: 400ms;
-                transition: 400ms;
-                content: " ";
-                display: block;
-                background-color: #FF6600;
-                background-image: -webkit-linear-gradient(#FF6600, #ffa366, #FF6600);
-                background-image: linear-gradient(#FF6600, #ffa366, #FF6600);
-                height: 50px;
-                width: 50px;
-                border-radius: 25px;
-                position: absolute;
-                left: 100%;
-                top: 15%;
-                margin-left: -25px;
-                box-shadow: inset 1px 1px 3px 1px rgba(0, 0, 0, 0.5);
-            }
-            
             .cc-card-logo.cc-card-visa {
                 background: white;
                 text-transform: uppercase;
@@ -229,22 +131,8 @@
                 font-weight: bold;
                 font-size: 15px;
                 line-height: 18px;
-            }
-            
-            .cc-card-logo.cc-card-visa:before,
-            .cc-card-logo.cc-card-visa:after {
-                content: " ";
-                display: block;
-                width: 100%;
-                height: 25%;
-            }
-            
-            .cc-card-logo.cc-card-visa:before {
-                background: #1A1876;
-            }
-            
-            .cc-card-logo.cc-card-visa:after {
-                background: #E79800;
+                background-image: url('../gold-cc-input/images/visa.png');
+                background-size: 60px 36px;
             }
             
             .cc-card.cc-card-visa.cc-card-identified .cc-card-front:before,
@@ -260,33 +148,9 @@
                 color: white;
                 font-weight: bold;
                 text-align: center;
-                font-size: 9px;
-                line-height: 36px;
                 z-index: 0;
-                text-shadow: 1px 1px rgba(0, 0, 0, 0.6);
-            }
-            
-            .cc-card-logo.cc-card-mastercard:before,
-            .cc-card-logo.cc-card-mastercard:after {
-                content: " ";
-                display: block;
-                width: 36px;
-                top: 0;
-                position: absolute;
-                height: 36px;
-                border-radius: 18px;
-            }
-            
-            .cc-card-logo.cc-card-mastercard:before {
-                left: 0;
-                background: #FF0000;
-                z-index: -1;
-            }
-            
-            .cc-card-logo.cc-card-mastercard:after {
-                right: 0;
-                background: #FFAB00;
-                z-index: -2;
+                background-image: url('../gold-cc-input/images/mastercard.png');
+                background-size: 60px 36px;
             }
             
             .cc-card.cc-card-mastercard.cc-card-identified .cc-card-front .cc-card-logo.cc-card-mastercard,
