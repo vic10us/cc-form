@@ -14,7 +14,7 @@
   ],
   "main": "cc-form.html",
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/vic10us/cc-form/",
+  "homepage": "https://vic10us.github.io/cc-form/",
   "ignore": [
     "/.*",
     "/test/",
