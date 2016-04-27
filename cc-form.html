@@ -37,32 +37,32 @@ Example:
   <template>
 
     <div class="cc-card-container">
-      <div class$="{{_ccClass(cardType,_showBack)}}">
+      <div class$="cc-card {{_ccClass(cardType,_showBack)}}">
         <div class="cc-card-front">
-          <div hidden$="{{!_hasCardType(cardType)}}" class$="{{_logoClass(cardType)}}"></div>
+          <div hidden$="{{!_hasCardType(cardType)}}" class$="cc-card-logo cc-card-{{cardType}}"></div>
           <div class="cc-card-lower">
             <div class="cc-card-shiny"></div>
-            <div class="cc-card-cvc cc-card-display"><span>{{cvc}}</span></div>
-            <div class="cc-card-number cc-card-display"><span>{{creditCard}}</span></div>
-            <div class="cc-card-name cc-card-display"><span>{{fullName}}</span></div>
-            <div class="cc-card-expiry cc-card-display" data-before="month/year" data-after="validthru">{{expiryDate}}</div>
+            <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cvcFocused)}}"><span>{{cvc}}</span></div>
+            <div class$="cc-card-number cc-card-display {{_conditionalFocusedClass(_cardNumberFocused)}}"><span>{{creditCard}}</span></div>
+            <div class$="cc-card-name cc-card-display {{_conditionalFocusedClass(_nameFocused)}}"><span>{{fullName}}</span></div>
+            <div class$="cc-card-expiry cc-card-display {{_conditionalFocusedClass(_expiryFocused)}}" data-before="month/year" data-after="validthru">{{expiryDate}}</div>
           </div>
         </div>
         <div class="cc-card-back">
           <div class="cc-card-bar"></div>
-          <div class="cc-card-cvc cc-card-display">{{cvc}}</div>
+          <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cvcFocused)}}">{{cvc}}</div>
           <div class="cc-card-shiny"></div>
         </div>
       </div>
     </div>
-
+    
     <div>
-      <paper-input value="{{fullName}}">&nbsp;</paper-input>
-      <gold-cc-input auto-validate$="[[autoValidate]]" required value="{{creditCard}}" card-type="{{cardType}}"></gold-cc-input>
-      <gold-cc-expiration-input auto-validate$="[[autoValidate]]" value="{{expiryDate}}"></gold-cc-expiration-input>
-      <gold-cc-cvc-input auto-validate$="[[autoValidate]]" card-type="[[cardType]]" on-focus="_enteredCvc" on-blur="_exitedCvc" value="{{cvc}}"></gold-cc-cvc-input>
+      <paper-input id="creditCardFullName" name="creditCardFullName" auto-validate="[[autoValidate]]" required value="{{fullName}}" label="Full Name" on-focusin="_focusElement" on-focusout="_focusElement">&nbsp;</paper-input>
+      <gold-cc-input id="creditCardNumber" auto-validate="[[autoValidate]]" name="creditCardNumber" required value="{{creditCard}}" card-type="{{cardType}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-input>
+      <gold-cc-expiration-input id="creditCardExpiryDate" name="creditCardExpiryDate" auto-validate="[[autoValidate]]" required value="{{expiryDate}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-expiration-input>
+      <gold-cc-cvc-input id="creditCardCvc" name="creditCardCvc" auto-validate="[[autoValidate]]" required card-type="[[cardType]]" on-focusin="_focusElement" on-focusout="_focusElement" value="{{cvc}}"></gold-cc-cvc-input>
     </div>
-
+    
   </template>
   
 </dom-module>
@@ -74,6 +74,10 @@ Example:
 
     properties: {
       
+      debug: {
+        type: Boolean,
+        value: false
+      },
       /**
        * Set to true to auto-validate the credit card input values.
        */
@@ -125,25 +129,40 @@ Example:
         type: Boolean,
         value: false,
         readonly: true
+      },
+      _cvcFocused: {
+        type: Boolean,
+        value: false,
+        readonly: true
+      },
+      _cardNumberFocused: {
+        type: Boolean,
+        value: false,
+        readonly: true
+      },
+      _nameFocused: {
+        type: Boolean,
+        value: false,
+        readonly: true
+      },
+      _expiryFocused: {
+        type: Boolean,
+        value: false,
+        readonly: true
       }
     },
-    _logoClass: function(cardType) {
-      var classes = 'cc-card-logo';
-      if (!!cardType) {
-        classes += ' cc-card-' + cardType;
-      }
-      console.log(classes);
-      return classes;
+    _conditionalFocusedClass: function(focused) {
+      return focused ? 'cc-card-focused' : '';
     },
     _ccClass: function(cardType, showBack) {
-      var classes = 'cc-card';
+      var classes;
       if (!!cardType) {
-        classes += ' cc-card-identified cc-card-' + cardType;
+        classes = 'cc-card-identified cc-card-' + cardType;
       }
       if (!!showBack) {
         classes += ' cc-card-flipped';
       }
-      console.log({cardType, showBack});
+      this._debug({cardType, showBack});
       return classes;
     },
     _cardValid: function(card) {
@@ -157,23 +176,48 @@ Example:
     _hasCardType: function(cardType) {
       return !!this.cardType;
     },
-    _enteredCvc: function() {
-      this._showBack = true;
+    _focusElement: function(e) {
+      focused = (e.type === 'focusin');
+      this._debug([e.type, e]);
+      switch (e.target.name) {
+        case 'creditCardFullName':
+          this._nameFocused = focused;
+          break;
+        case 'creditCardNumber':
+          this._cardNumberFocused = focused;
+          break;
+        case 'creditCardExpiryDate':
+          this._expiryFocused = focused;
+          break;
+        case 'creditCardCvc':
+          this._cvcFocused = focused;
+          this._showBack = focused;
+          break;
+        default:
+          if (e.target.id === 'expirationMonth' || e.target.id === 'expirationYear') {
+            this._expiryFocused = focused;
+          }
+          break;
+      }
     },
-    _exitedCvc: function() {
-      this._showBack = false;
+    _debug: function(msg) {
+      if (!!this.debug) { console.log(msg); } 
     },
     observers: [
       '_cardValid(creditCard)'
     ],
     ready: function() {
-      console.log('cc-form ready');
+       this._debug('cc-form ready');
     },
     attached: function() {
-      console.log('cc-form attached');
+      this._debug('cc-form attached');
+      if (this.cardType !== '') {
+        this._debug('The card type was provided.');
+        this.$.creditCardNumber.validate();
+      }
     },
     detached: function() {
-      console.log('cc-form detached');
+       this._debug('cc-form detached');
     },
 
   });
