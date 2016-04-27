@@ -1,6 +1,10 @@
 {
   "name": "cc-form",
+<<<<<<< HEAD
   "version": "1.0.3",
+=======
+  "version": "1.0.2",
+>>>>>>> deac9b4... Update bower.json
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],
