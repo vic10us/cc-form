@@ -76,7 +76,8 @@ Example:
       
       debug: {
         type: Boolean,
-        value: false
+        value: false,
+        notify: true
       },
       /**
        * Set to true to auto-validate the credit card input values.
@@ -90,21 +91,24 @@ Example:
        */
       fullName: {
         type: String,
-        value: ''
+        value: '',
+        notify: true
       },
       /**
        * Credit Card number 
        */
       creditCard: {
         type: String,
-        value: ''
+        value: '',
+        notify: true
       },
       /**
        * Credit Card expiry date in the format: `[MM/YY]`
        */
       expiryDate: {
         type: String,
-        value: ''
+        value: '',
+        notify: true
       },
       /**
        * Credit Card Type 
@@ -116,14 +120,16 @@ Example:
        */
       cardType: {
         type: String,
-        value: ''
+        value: '',
+        notify: true
       },
       /**
        * Credit Card CVC (Card Verification Code) 
        */
       cvc: {
         type: String,
-        value: ''
+        value: '',
+        notify: true
       },
       _showBack: {
         type: Boolean,
