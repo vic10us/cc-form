@@ -1,10 +1,14 @@
 {
   "name": "cc-form",
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "1.0.3",
 =======
   "version": "1.0.2",
 >>>>>>> deac9b4... Update bower.json
+=======
+  "version": "1.0.4",
+>>>>>>> 4652e9a... Updated field arrangement and sizing
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],
@@ -29,6 +33,7 @@
     "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^1.0.8",
     "gold-cc-input": "PolymerElements/gold-cc-input#^1.0.7",
     "gold-cc-expiration-input": "PolymerElements/gold-cc-expiration-input#^1.1.2",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
     "paper-input": "PolymerElements/paper-input#^1.1.11"
   },
   "devDependencies": {
