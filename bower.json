@@ -1,6 +1,6 @@
 {
   "name": "cc-form",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],
@@ -25,6 +25,7 @@
     "gold-cc-cvc-input": "PolymerElements/gold-cc-cvc-input#^1.0.8",
     "gold-cc-input": "PolymerElements/gold-cc-input#^1.0.7",
     "gold-cc-expiration-input": "PolymerElements/gold-cc-expiration-input#^1.1.2",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
     "paper-input": "PolymerElements/paper-input#^1.1.11"
   },
   "devDependencies": {

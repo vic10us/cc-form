@@ -12,6 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../gold-cc-cvc-input/gold-cc-cvc-input.html">
 <link rel="import" href="../gold-cc-input/gold-cc-input.html">
 <link rel="import" href="../paper-input/paper-input.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="cc-form.html">
 <link rel="import" href="cc-styles.html">
 
@@ -32,37 +33,51 @@ Example:
       display: block;
       box-sizing: border-box;
     }
+    .input-container {
+      padding-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .input-container > div {
+      display: flex;
+      flex-direction: row;
+    }
+    .cc-form-container {
+      width: 350px;
+    }
   </style>
   
   <template>
-
-    <div class="cc-card-container">
-      <div class$="cc-card {{_ccClass(cardType,_showBack)}}">
-        <div class="cc-card-front">
-          <div hidden$="{{!_hasCardType(cardType)}}" class$="cc-card-logo cc-card-{{cardType}}"></div>
-          <div class="cc-card-lower">
+    <div class="cc-form-container">
+      <div class="cc-card-container">
+        <div class$="cc-card {{_ccClass(cardType,_showBack)}}">
+          <div class="cc-card-front">
+            <div hidden$="{{!_hasCardType(cardType)}}" class$="cc-card-logo cc-card-{{cardType}}"></div>
+            <div class="cc-card-lower">
+              <div class="cc-card-shiny"></div>
+              <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cvcFocused)}}"><span>{{cvc}}</span></div>
+              <div class$="cc-card-number cc-card-display {{_conditionalFocusedClass(_cardNumberFocused)}}"><span>{{creditCard}}</span></div>
+              <div class$="cc-card-name cc-card-display {{_conditionalFocusedClass(_nameFocused)}}"><span>{{fullName}}</span></div>
+              <div class$="cc-card-expiry cc-card-display {{_conditionalFocusedClass(_expiryFocused)}}" data-before="month/year" data-after="validthru">{{expiryDate}}</div>
+            </div>
+          </div>
+          <div class="cc-card-back">
+            <div class="cc-card-bar"></div>
+            <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cvcFocused)}}">{{cvc}}</div>
             <div class="cc-card-shiny"></div>
-            <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cvcFocused)}}"><span>{{cvc}}</span></div>
-            <div class$="cc-card-number cc-card-display {{_conditionalFocusedClass(_cardNumberFocused)}}"><span>{{creditCard}}</span></div>
-            <div class$="cc-card-name cc-card-display {{_conditionalFocusedClass(_nameFocused)}}"><span>{{fullName}}</span></div>
-            <div class$="cc-card-expiry cc-card-display {{_conditionalFocusedClass(_expiryFocused)}}" data-before="month/year" data-after="validthru">{{expiryDate}}</div>
           </div>
         </div>
-        <div class="cc-card-back">
-          <div class="cc-card-bar"></div>
-          <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cvcFocused)}}">{{cvc}}</div>
-          <div class="cc-card-shiny"></div>
+      </div>
+      
+      <div class="input-container">
+        <gold-cc-input id="creditCardNumber" auto-validate="[[autoValidate]]" name="creditCardNumber" required value="{{creditCard}}" card-type="{{cardType}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-input>
+        <paper-input id="creditCardFullName" name="creditCardFullName" auto-validate="[[autoValidate]]" required value="{{fullName}}" label="Full Name" on-focusin="_focusElement" on-focusout="_focusElement">&nbsp;</paper-input>
+        <div layout horizontal flex>
+          <gold-cc-expiration-input style="padding-right: 10px; width: 100px;" id="creditCardExpiryDate" name="creditCardExpiryDate" auto-validate="[[autoValidate]]" required value="{{expiryDate}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-expiration-input>
+          <gold-cc-cvc-input style="padding-left: 10px;" id="creditCardCvc" name="creditCardCvc" auto-validate="[[autoValidate]]" required card-type="[[cardType]]" on-focusin="_focusElement" on-focusout="_focusElement" value="{{cvc}}"></gold-cc-cvc-input>
         </div>
       </div>
     </div>
-    
-    <div>
-      <paper-input id="creditCardFullName" name="creditCardFullName" auto-validate="[[autoValidate]]" required value="{{fullName}}" label="Full Name" on-focusin="_focusElement" on-focusout="_focusElement">&nbsp;</paper-input>
-      <gold-cc-input id="creditCardNumber" auto-validate="[[autoValidate]]" name="creditCardNumber" required value="{{creditCard}}" card-type="{{cardType}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-input>
-      <gold-cc-expiration-input id="creditCardExpiryDate" name="creditCardExpiryDate" auto-validate="[[autoValidate]]" required value="{{expiryDate}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-expiration-input>
-      <gold-cc-cvc-input id="creditCardCvc" name="creditCardCvc" auto-validate="[[autoValidate]]" required card-type="[[cardType]]" on-focusin="_focusElement" on-focusout="_focusElement" value="{{cvc}}"></gold-cc-cvc-input>
-    </div>
-    
   </template>
   
 </dom-module>
