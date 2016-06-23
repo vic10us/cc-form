@@ -2,6 +2,7 @@
   "name": "cc-form",
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "1.0.3",
 =======
   "version": "1.0.2",
@@ -9,6 +10,9 @@
 =======
   "version": "1.0.4",
 >>>>>>> 4652e9a... Updated field arrangement and sizing
+=======
+  "version": "1.0.5",
+>>>>>>> 1ebbe36... Fixed circular reference
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],
