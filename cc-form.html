@@ -1,18 +1,10 @@
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../gold-cc-expiration-input/gold-cc-expiration-input.html">
 <link rel="import" href="../gold-cc-cvc-input/gold-cc-cvc-input.html">
 <link rel="import" href="../gold-cc-input/gold-cc-input.html">
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
 <link rel="import" href="cc-styles.html">
 
 <!--
@@ -32,22 +24,26 @@ Example:
       display: block;
       box-sizing: border-box;
     }
-    .input-container {
-      padding-top: 20px;
-      display: flex;
-      flex-direction: column;
-    }
-    .input-container > div {
-      display: flex;
-      flex-direction: row;
-    }
     .cc-form-container {
       width: 350px;
     }
+    .top > .cc-card-container {
+      padding-bottom: 10px;
+    }
+    .bottom > .cc-card-container {
+      padding-top: 20px;
+    }
+    .hidden > .cc-card-container {
+      padding: 0px;
+      display: none;
+      visibility: hidden;
+    }
   </style>
+  <style is="custom-style" include="iron-flex"></style>
+  <style is="custom-style" include="iron-flex-reverse"></style>
   
   <template>
-    <div class="cc-form-container">
+    <div class$="cc-form-container layout {{_layoutClass(previewPosition)}}">
       <div class="cc-card-container">
         <div class$="cc-card {{_ccClass(cardType,_showBack)}}">
           <div class="cc-card-front">
@@ -69,9 +65,9 @@ Example:
       </div>
       
       <div class="input-container">
-        <gold-cc-input id="creditCardNumber" auto-validate="[[autoValidate]]" name="creditCardNumber" required value="{{creditCard}}" card-type="{{cardType}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-input>
         <paper-input id="creditCardFullName" name="creditCardFullName" auto-validate="[[autoValidate]]" required value="{{fullName}}" label="Full Name" on-focusin="_focusElement" on-focusout="_focusElement">&nbsp;</paper-input>
-        <div layout horizontal flex>
+        <gold-cc-input id="creditCardNumber" auto-validate="[[autoValidate]]" name="creditCardNumber" required value="{{creditCard}}" card-type="{{cardType}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-input>
+        <div class="layout horizontal flex">
           <gold-cc-expiration-input style="padding-right: 10px; width: 100px;" id="creditCardExpiryDate" name="creditCardExpiryDate" auto-validate="[[autoValidate]]" required value="{{expiryDate}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-expiration-input>
           <gold-cc-cvc-input style="padding-left: 10px;" id="creditCardCvc" name="creditCardCvc" auto-validate="[[autoValidate]]" required card-type="[[cardType]]" on-focusin="_focusElement" on-focusout="_focusElement" value="{{cvc}}"></gold-cc-cvc-input>
         </div>
@@ -145,6 +141,21 @@ Example:
         value: '',
         notify: true
       },
+      
+      /**
+       * The position of the Credit Card Preview
+       * 
+       * Possible options:
+       * - top
+       * - bottom
+       * - none
+       */
+      previewPosition: {
+        type: String,
+        value: 'top',
+        notify: true
+      },
+            
       _showBack: {
         type: Boolean,
         value: false,
@@ -173,6 +184,10 @@ Example:
     },
     _conditionalFocusedClass: function(focused) {
       return focused ? 'cc-card-focused' : '';
+    },
+    _layoutClass: function(position) {
+      return position === 'none' ? ' vertical hidden' : 
+              position === 'top' ? 'vertical top' : 'vertical-reverse bottom'; 
     },
     _ccClass: function(cardType, showBack) {
       var classes;
