@@ -4,6 +4,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "1.0.3",
 =======
   "version": "1.0.2",
@@ -17,10 +18,13 @@
 =======
   "version": "1.0.6",
 >>>>>>> a263e5d... Adding previewPosition attribute
+=======
+  "version": "1.0.7",
+>>>>>>> 31db377... More style changes
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],
-  "description": "A credit card form using Polymer Gold Elements",
+  "description": "A credit card form using Polymer Gold Elements and awesome Credit Card preview",
   "keywords": [
     "web-component",
     "web-components",

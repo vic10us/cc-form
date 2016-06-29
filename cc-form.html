@@ -24,9 +24,6 @@ Example:
       display: block;
       box-sizing: border-box;
     }
-    .cc-form-container {
-      width: 350px;
-    }
     .top > .cc-card-container {
       padding-bottom: 10px;
     }
@@ -37,6 +34,19 @@ Example:
       padding: 0px;
       display: none;
       visibility: hidden;
+    }
+    .spacer {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+    gold-cc-expiration-input {
+      width: 100px;
+    }
+    @media only screen and (max-width: 400px) {
+      .cc-card-container {
+          display: none;
+          visibility: hidden;
+      }
     }
   </style>
   <style is="custom-style" include="iron-flex"></style>
@@ -65,11 +75,41 @@ Example:
       </div>
       
       <div class="input-container">
-        <paper-input id="creditCardFullName" name="creditCardFullName" auto-validate="[[autoValidate]]" required value="{{fullName}}" label="Cardholder Name" on-focusin="_focusElement" on-focusout="_focusElement">&nbsp;</paper-input>
-        <gold-cc-input id="creditCardNumber" auto-validate="[[autoValidate]]" name="creditCardNumber" required value="{{creditCard}}" card-type="{{cardType}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-input>
+        <paper-input id="creditCardFullName" 
+                    name="creditCardFullName" 
+                    auto-validate="[[autoValidate]]" 
+                    required 
+                    value="{{fullName}}" 
+                    label="Cardholder Name" 
+                    on-focusin="_focusElement" 
+                    on-focusout="_focusElement"></paper-input>
+        <gold-cc-input id="creditCardNumber" 
+                    auto-validate="[[autoValidate]]" 
+                    name="creditCardNumber" 
+                    required 
+                    value="{{creditCard}}" 
+                    card-type="{{cardType}}" 
+                    label="Card Number" 
+                    on-focusin="_focusElement" 
+                    on-focusout="_focusElement"></gold-cc-input>
         <div class="layout horizontal flex">
-          <gold-cc-expiration-input style="padding-right: 10px; width: 100px;" id="creditCardExpiryDate" name="creditCardExpiryDate" auto-validate="[[autoValidate]]" required value="{{expiryDate}}" on-focusin="_focusElement" on-focusout="_focusElement"></gold-cc-expiration-input>
-          <gold-cc-cvc-input style="padding-left: 10px;" id="creditCardCvc" name="creditCardCvc" auto-validate="[[autoValidate]]" required card-type="[[cardType]]" on-focusin="_focusElement" on-focusout="_focusElement" value="{{cvc}}"></gold-cc-cvc-input>
+          <gold-cc-expiration-input id="creditCardExpiryDate" 
+                    name="creditCardExpiryDate" 
+                    auto-validate="[[autoValidate]]" 
+                    required 
+                    value="{{expiryDate}}" 
+                    label="Expiry" 
+                    on-focusin="_focusElement" 
+                    on-focusout="_focusElement"></gold-cc-expiration-input>
+          <div class="spacer"></div>
+          <gold-cc-cvc-input id="creditCardCvc" 
+                    name="creditCardCvc" 
+                    auto-validate="[[autoValidate]]" 
+                    required 
+                    card-type="[[cardType]]" 
+                    on-focusin="_focusElement" 
+                    on-focusout="_focusElement" 
+                    value="{{cvc}}"></gold-cc-cvc-input>
         </div>
       </div>
     </div>
