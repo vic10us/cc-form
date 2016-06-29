@@ -1,10 +1,10 @@
 {
   "name": "cc-form",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],
-  "description": "A credit card form using Polymer Gold Elements",
+  "description": "A credit card form using Polymer Gold Elements and awesome Credit Card preview",
   "keywords": [
     "web-component",
     "web-components",
