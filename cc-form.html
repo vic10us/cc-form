@@ -51,7 +51,7 @@ Example:
   </style>
   <style is="custom-style" include="iron-flex"></style>
   <style is="custom-style" include="iron-flex-reverse"></style>
-  
+
   <template>
     <div class$="cc-form-container layout {{_layoutClass(previewPosition)}}">
       <div class="cc-card-container">
@@ -73,48 +73,48 @@ Example:
           </div>
         </div>
       </div>
-      
+
       <div class="input-container">
-        <paper-input id="creditCardFullName" 
-                    name="creditCardFullName" 
-                    auto-validate="[[autoValidate]]" 
-                    required 
-                    value="{{fullName}}" 
-                    label="Cardholder Name" 
-                    on-focusin="_focusElement" 
+        <paper-input id="creditCardFullName"
+                    name="[[fullNameName]]"
+                    auto-validate="[[autoValidate]]"
+                    required
+                    value="{{fullName}}"
+                    label="[[fullNameLabel]]"
+                    on-focusin="_focusElement"
                     on-focusout="_focusElement"></paper-input>
-        <gold-cc-input id="creditCardNumber" 
-                    auto-validate="[[autoValidate]]" 
-                    name="creditCardNumber" 
-                    required 
-                    value="{{creditCard}}" 
-                    card-type="{{cardType}}" 
-                    label="Card Number" 
-                    on-focusin="_focusElement" 
+        <gold-cc-input id="creditCardNumber"
+                    auto-validate="[[autoValidate]]"
+                    name="[[creditCardName]]"
+                    required
+                    value="{{creditCard}}"
+                    card-type="{{cardType}}"
+                    label="[[creditCardLabel]]"
+                    on-focusin="_focusElement"
                     on-focusout="_focusElement"></gold-cc-input>
         <div class="layout horizontal flex">
-          <gold-cc-expiration-input id="creditCardExpiryDate" 
-                    name="creditCardExpiryDate" 
-                    auto-validate="[[autoValidate]]" 
-                    required 
-                    value="{{expiryDate}}" 
-                    label="Expiry" 
-                    on-focusin="_focusElement" 
+          <gold-cc-expiration-input id="creditCardExpiryDate"
+                    name="[[expiryDateName]]"
+                    auto-validate="[[autoValidate]]"
+                    required
+                    value="{{expiryDate}}"
+                    label="[[expiryDateLabel]]"
+                    on-focusin="_focusElement"
                     on-focusout="_focusElement"></gold-cc-expiration-input>
           <div class="spacer"></div>
-          <gold-cc-cvc-input id="creditCardCvc" 
-                    name="creditCardCvc" 
-                    auto-validate="[[autoValidate]]" 
-                    required 
-                    card-type="[[cardType]]" 
-                    on-focusin="_focusElement" 
-                    on-focusout="_focusElement" 
+          <gold-cc-cvc-input id="creditCardCvc"
+                    name="[[cvcName]]"
+                    auto-validate="[[autoValidate]]"
+                    required
+                    card-type="[[cardType]]"
+                    on-focusin="_focusElement"
+                    on-focusout="_focusElement"
                     value="{{cvc}}"></gold-cc-cvc-input>
         </div>
       </div>
     </div>
   </template>
-  
+
 </dom-module>
 
 <script>
@@ -123,7 +123,7 @@ Example:
     is: 'cc-form',
 
     properties: {
-      
+
       debug: {
         type: Boolean,
         value: false,
@@ -137,7 +137,7 @@ Example:
         value: false
       },
       /**
-       * Full name on the Credit Card 
+       * Full name on the Credit Card
        */
       fullName: {
         type: String,
@@ -145,7 +145,7 @@ Example:
         notify: true
       },
       /**
-       * Credit Card number 
+       * Credit Card number
        */
       creditCard: {
         type: String,
@@ -161,12 +161,12 @@ Example:
         notify: true
       },
       /**
-       * Credit Card Type 
+       * Credit Card Type
        *  Possible valid values
        * - mastercard
        * - visa
        * - amex
-       * - discover 
+       * - discover
        */
       cardType: {
         type: String,
@@ -174,17 +174,71 @@ Example:
         notify: true
       },
       /**
-       * Credit Card CVC (Card Verification Code) 
+       * Credit Card CVC (Card Verification Code)
        */
       cvc: {
         type: String,
         value: '',
         notify: true
       },
-      
+
+
+      /**
+       * Name attribute for full name input
+       */
+      fullNameName: {
+        type: String,
+      },
+
+      /**
+       * Name attribute for card number input
+       */
+      creditCardName: {
+        type: String
+      },
+
+      /**
+       * Name attribute for expiry date input
+       */
+      expiryDateName: {
+        type: String
+      },
+
+      /**
+       * Name attribute for cvc card input
+       */
+      cvcName: {
+        type: String
+      },
+
+      /**
+       * Label for for full name input
+       */
+      fullNameLabel: {
+        type: String,
+        value: 'Cardholder name'
+      },
+
+      /**
+       * Label for for card number input
+       */
+      creditCardLabel: {
+        type: String,
+        value: 'Card number'
+      },
+
+      /**
+       * Label for for expiry date input
+       */
+      expiryDateLabel: {
+        type: String,
+        value: 'Expiry'
+      },
+
+
       /**
        * The position of the Credit Card Preview
-       * 
+       *
        * Possible options:
        * - top
        * - bottom
@@ -195,7 +249,7 @@ Example:
         value: 'top',
         notify: true
       },
-            
+
       _showBack: {
         type: Boolean,
         value: false,
@@ -226,8 +280,8 @@ Example:
       return focused ? 'cc-card-focused' : '';
     },
     _layoutClass: function(position) {
-      return position === 'none' ? ' vertical hidden' : 
-              position === 'top' ? 'vertical top' : 'vertical-reverse bottom'; 
+      return position === 'none' ? ' vertical hidden' :
+              position === 'top' ? 'vertical top' : 'vertical-reverse bottom';
     },
     _ccClass: function(cardType, showBack) {
       var classes;
@@ -254,7 +308,7 @@ Example:
     _focusElement: function(e) {
       focused = (e.type === 'focusin');
       this._debug([e.type, e]);
-      switch (e.target.name) {
+      switch (e.target.id) {
         case 'creditCardFullName':
           this._nameFocused = focused;
           break;
@@ -276,7 +330,7 @@ Example:
       }
     },
     _debug: function(msg) {
-      if (!!this.debug) { console.log(msg); } 
+      if (!!this.debug) { console.log(msg); }
     },
     observers: [
       '_cardValid(creditCard)'
