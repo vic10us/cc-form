@@ -18,8 +18,7 @@ Example:
 -->
 
 <dom-module id="cc-form">
-  <style include="cc-styles"></style>
-  <style is="custom-style">
+  <style is="custom-style" include="cc-styles iron-flex iron-flex-reverse">
     :host {
       display: block;
       box-sizing: border-box;
@@ -49,8 +48,6 @@ Example:
       }
     }
   </style>
-  <style is="custom-style" include="iron-flex"></style>
-  <style is="custom-style" include="iron-flex-reverse"></style>
   
   <template>
     <div class$="cc-form-container layout {{_layoutClass(previewPosition)}}">
@@ -60,15 +57,15 @@ Example:
             <div hidden$="{{!_hasCardType(cardType)}}" class$="cc-card-logo cc-card-{{cardType}}"></div>
             <div class="cc-card-lower">
               <div class="cc-card-shiny"></div>
-              <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cvcFocused)}}"><span>{{cvc}}</span></div>
+              <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cardCvcFocused)}}"><span>{{cvc}}</span></div>
               <div class$="cc-card-number cc-card-display {{_conditionalFocusedClass(_cardNumberFocused)}}"><span>{{creditCard}}</span></div>
-              <div class$="cc-card-name cc-card-display {{_conditionalFocusedClass(_nameFocused)}}"><span>{{fullName}}</span></div>
-              <div class$="cc-card-expiry cc-card-display {{_conditionalFocusedClass(_expiryFocused)}}" data-before="month/year" data-after="validthru">{{expiryDate}}</div>
+              <div class$="cc-card-name cc-card-display {{_conditionalFocusedClass(_cardNameFocused)}}"><span>{{fullName}}</span></div>
+              <div class$="cc-card-expiry cc-card-display {{_conditionalFocusedClass(_cardExpiryFocused)}}" data-before="month/year" data-after="validthru">{{expiryDate}}</div>
             </div>
           </div>
           <div class="cc-card-back">
             <div class="cc-card-bar"></div>
-            <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cvcFocused)}}">{{cvc}}</div>
+            <div class$="cc-card-cvc cc-card-display {{_conditionalFocusedClass(_cardCvcFocused)}}">{{cvc}}</div>
             <div class="cc-card-shiny"></div>
           </div>
         </div>
@@ -80,9 +77,10 @@ Example:
                     auto-validate="[[autoValidate]]" 
                     required 
                     value="{{fullName}}" 
-                    label="Cardholder Name" 
-                    on-focusin="_focusElement" 
-                    on-focusout="_focusElement"></paper-input>
+                    label="Cardholder Name"
+                    focused="{{_cardNameFocused}}" 
+                    aon-focusin="_focusElement" 
+                    aon-focusout="_focusElement"></paper-input>
         <gold-cc-input id="creditCardNumber" 
                     auto-validate="[[autoValidate]]" 
                     name="creditCardNumber" 
@@ -90,25 +88,28 @@ Example:
                     value="{{creditCard}}" 
                     card-type="{{cardType}}" 
                     label="Card Number" 
-                    on-focusin="_focusElement" 
-                    on-focusout="_focusElement"></gold-cc-input>
-        <div class="layout horizontal flex">
+                    focused="{{_cardNumberFocused}}"
+                    aon-focusin="_focusElement" 
+                    aon-focusout="_focusElement"></gold-cc-input>
+        <div class="layout horizontal">
           <gold-cc-expiration-input id="creditCardExpiryDate" 
                     name="creditCardExpiryDate" 
                     auto-validate="[[autoValidate]]" 
                     required 
                     value="{{expiryDate}}" 
                     label="Expiry" 
-                    on-focusin="_focusElement" 
-                    on-focusout="_focusElement"></gold-cc-expiration-input>
+                    focused="{{_cardExpiryFocused}}"
+                    aon-focusin="_focusElement" 
+                    aon-focusout="_focusElement"></gold-cc-expiration-input>
           <div class="spacer"></div>
           <gold-cc-cvc-input id="creditCardCvc" 
                     name="creditCardCvc" 
                     auto-validate="[[autoValidate]]" 
                     required 
                     card-type="[[cardType]]" 
-                    on-focusin="_focusElement" 
-                    on-focusout="_focusElement" 
+                    focused="{{_cardCvcFocused}}"
+                    aon-focusin="_focusElement" 
+                    aon-focusout="_focusElement" 
                     value="{{cvc}}"></gold-cc-cvc-input>
         </div>
       </div>
@@ -123,7 +124,10 @@ Example:
     is: 'cc-form',
 
     properties: {
-      
+      version: {
+        type: String,
+        value: 'v1.0.8'
+      },
       debug: {
         type: Boolean,
         value: false,
@@ -201,7 +205,7 @@ Example:
         value: false,
         readonly: true
       },
-      _cvcFocused: {
+      _cardCvcFocused: {
         type: Boolean,
         value: false,
         readonly: true
@@ -211,12 +215,12 @@ Example:
         value: false,
         readonly: true
       },
-      _nameFocused: {
+      _cardNameFocused: {
         type: Boolean,
         value: false,
         readonly: true
       },
-      _expiryFocused: {
+      _cardExpiryFocused: {
         type: Boolean,
         value: false,
         readonly: true
@@ -251,34 +255,15 @@ Example:
     _hasCardType: function(cardType) {
       return !!this.cardType;
     },
-    _focusElement: function(e) {
-      focused = (e.type === 'focusin');
-      this._debug([e.type, e]);
-      switch (e.target.name) {
-        case 'creditCardFullName':
-          this._nameFocused = focused;
-          break;
-        case 'creditCardNumber':
-          this._cardNumberFocused = focused;
-          break;
-        case 'creditCardExpiryDate':
-          this._expiryFocused = focused;
-          break;
-        case 'creditCardCvc':
-          this._cvcFocused = focused;
-          this._showBack = focused;
-          break;
-        default:
-          if (e.target.id === 'expirationMonth' || e.target.id === 'expirationYear') {
-            this._expiryFocused = focused;
-          }
-          break;
-      }
-    },
     _debug: function(msg) {
       if (!!this.debug) { console.log(msg); } 
     },
+    _cardCvcFocusedChanged: function(n) {
+      this._showBack = n;
+      console.log('cvc is' + (n ? ' ' : ' not ') + 'focused');
+    },
     observers: [
+      '_cardCvcFocusedChanged(_cardCvcFocused)',
       '_cardValid(creditCard)'
     ],
     ready: function() {
