@@ -1,0 +1,78 @@
+<!doctype html>
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+    <title>cc-form Demo</title>
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    
+    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
+    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
+    
+    <link rel="import" href="../stripe-cc-form.html">
+    <style is="custom-style" include="demo-pages-shared-styles">
+      demo-snippet.horizontal {
+      --demo-snippet-demo: {
+        @apply(--layout-horizontal);
+        @apply(--layout-justified);
+        @apply(--layout-wrap);
+      }
+    }
+    demo-snippet.horizontal paper-input {
+      display: inline-block;
+    }
+    </style>
+  </head>
+  <body unresolved>
+    <div class="vertical-section-container centered">
+        <h3>An example of <code>&lt;stripe-cc-form&gt;</code> with bindings:</h3>
+        <demo-snippet>
+          <template id="demoStripeForm">
+            <stripe-cc-form
+                  id="form1"
+                  on-stripe-card-validation-succeeded="doSuccess"
+                  stripe-card-validation-failed="doFailed"
+                  publisheable-key="your-publishable-key" 
+                  auto-validate 
+                  full-name="Fuller Name" 
+                  card-type="visa" 
+                  credit-card="4000 0000 0000 0002" 
+                  expiry-date="01/18" 
+                  cvc="123"></stripe-cc-form>
+              <paper-button id="form1button">Validate</paper-button>
+          </template>
+              <script>
+              window.addEventListener('WebComponentsReady', function(e) {
+                
+                var form1 = document.querySelector('#form1');
+
+                document.querySelector('#form1button').addEventListener('tap', function (e) {
+                  form1.validate();
+                });
+
+                form1.addEventListener('stripe-card-validation-succeeded', function (e) {
+                  console.log('woot!!!');
+                  console.log(e.detail);
+                });
+
+                form1.addEventListener('stripe-card-validation-failed', function (e) {
+                  console.log('boo!!!');
+                  console.log(e.detail);
+                });
+
+              });
+            </script>
+        </demo-snippet>
+    </div>
+
+  </body>
+</html>

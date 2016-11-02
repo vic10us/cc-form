@@ -6,6 +6,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "1.0.3",
 =======
   "version": "1.0.2",
@@ -25,6 +26,9 @@
 =======
   "version": "1.0.8",
 >>>>>>> 8612b82... Better element focus event handing and style fixes
+=======
+  "version": "1.0.9",
+>>>>>>> 51180ed... adding stripe integration
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],
@@ -37,7 +41,7 @@
     "credit-card"
   ],
   "main": "cc-form.html",
-  "license": "http://polymer.github.io/LICENSE.txt",
+  "license": "MIT",
   "homepage": "https://vic10us.github.io/cc-form/",
   "ignore": [
     "/.*",
@@ -50,6 +54,7 @@
     "gold-cc-input": "PolymerElements/gold-cc-input#^1.0.7",
     "gold-cc-expiration-input": "PolymerElements/gold-cc-expiration-input#^1.1.2",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
+    "paper-button": "PolymerElements/paper-button#^1.0.12",
     "paper-input": "PolymerElements/paper-input#^1.1.11"
   },
   "devDependencies": {

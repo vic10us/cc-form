@@ -5,6 +5,7 @@
 <link rel="import" href="../paper-input/paper-input.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout-classes.html">
+<link rel="import" href="cc-form-behavior.html">
 <link rel="import" href="cc-styles.html">
 
 <!--
@@ -82,7 +83,7 @@ Example:
                     aon-focusin="_focusElement" 
                     aon-focusout="_focusElement"></paper-input>
         <gold-cc-input id="creditCardNumber" 
-                    auto-validate="[[autoValidate]]" 
+                    auto-validate="[[autoValidate]]"
                     name="creditCardNumber" 
                     required 
                     value="{{creditCard}}" 
@@ -122,84 +123,13 @@ Example:
   Polymer({
 
     is: 'cc-form',
+    behaviors: [CreditCardFormBehavior],
 
     properties: {
       version: {
         type: String,
-        value: 'v1.0.8'
+        value: 'v1.0.9'
       },
-      debug: {
-        type: Boolean,
-        value: false,
-        notify: true
-      },
-      /**
-       * Set to true to auto-validate the credit card input values.
-       */
-      autoValidate: {
-        type: Boolean,
-        value: false
-      },
-      /**
-       * Full name on the Credit Card 
-       */
-      fullName: {
-        type: String,
-        value: '',
-        notify: true
-      },
-      /**
-       * Credit Card number 
-       */
-      creditCard: {
-        type: String,
-        value: '',
-        notify: true
-      },
-      /**
-       * Credit Card expiry date in the format: `[MM/YY]`
-       */
-      expiryDate: {
-        type: String,
-        value: '',
-        notify: true
-      },
-      /**
-       * Credit Card Type 
-       *  Possible valid values
-       * - mastercard
-       * - visa
-       * - amex
-       * - discover 
-       */
-      cardType: {
-        type: String,
-        value: '',
-        notify: true
-      },
-      /**
-       * Credit Card CVC (Card Verification Code) 
-       */
-      cvc: {
-        type: String,
-        value: '',
-        notify: true
-      },
-      
-      /**
-       * The position of the Credit Card Preview
-       * 
-       * Possible options:
-       * - top
-       * - bottom
-       * - none
-       */
-      previewPosition: {
-        type: String,
-        value: 'top',
-        notify: true
-      },
-            
       _showBack: {
         type: Boolean,
         value: false,
@@ -255,12 +185,9 @@ Example:
     _hasCardType: function(cardType) {
       return !!this.cardType;
     },
-    _debug: function(msg) {
-      if (!!this.debug) { console.log(msg); } 
-    },
     _cardCvcFocusedChanged: function(n) {
       this._showBack = n;
-      console.log('cvc is' + (n ? ' ' : ' not ') + 'focused');
+      this._debug('cvc is' + (n ? ' ' : ' not ') + 'focused');
     },
     observers: [
       '_cardCvcFocusedChanged(_cardCvcFocused)',
