@@ -7,6 +7,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "1.0.3",
 =======
   "version": "1.0.2",
@@ -29,6 +30,9 @@
 =======
   "version": "1.0.9",
 >>>>>>> 51180ed... adding stripe integration
+=======
+  "version": "1.0.10",
+>>>>>>> 79c8825... oops missed previewPosition
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],
