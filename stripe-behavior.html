@@ -77,6 +77,7 @@ Behavior wrapper for the Stripe library
     validate: function(e, detail) {
       try {
       this.Stripe.card.createToken({
+        name: this.fullName || '',
         number: this.creditCard,
         cvc: this.cvc,
         exp: this.expiryDate

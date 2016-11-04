@@ -1,4 +1,21 @@
 [![Join the chat at https://gitter.im/vic10us/cc-form](https://badges.gitter.im/vic10us/cc-form.svg)](https://gitter.im/vic10us/cc-form?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) 
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://beta.webcomponents.org/element/vic10us/cc-form)
+
+# \<cc-form\>
+
+<!--
+```
+<custom-element-demo>
+  <template is="dom-bind">
+    <link rel="import" href="cc-form.html">
+    <cc-form></cc-form>
+  </template>
+</custom-element-demo>
+```
+-->
+```
+<cc-form></cc-form>
+```
 
 # A Polymer CreditCard Element
 *_add a little pzazz to the mundane task of entering your credit card info on a website_*
