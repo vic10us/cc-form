@@ -9,6 +9,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   "version": "1.0.3",
 =======
   "version": "1.0.2",
@@ -37,6 +38,9 @@
 =======
   "version": "1.0.11",
 >>>>>>> 7893d7b... Bug fixes
+=======
+  "version": "1.0.12",
+>>>>>>> d8f90be... Cleaned up dev leftovers and added name to stripe card validation
   "authors": [
     "Keith Hill <keith@dexs.ca>"
   ],

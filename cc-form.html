@@ -79,9 +79,7 @@ Example:
                     required 
                     value="{{fullName}}" 
                     label="Cardholder Name"
-                    focused="{{_cardNameFocused}}" 
-                    aon-focusin="_focusElement" 
-                    aon-focusout="_focusElement"></paper-input>
+                    focused="{{_cardNameFocused}}"></paper-input>
         <gold-cc-input id="creditCardNumber" 
                     auto-validate="[[autoValidate]]"
                     name="creditCardNumber" 
@@ -89,9 +87,7 @@ Example:
                     value="{{creditCard}}" 
                     card-type="{{cardType}}" 
                     label="Card Number" 
-                    focused="{{_cardNumberFocused}}"
-                    aon-focusin="_focusElement" 
-                    aon-focusout="_focusElement"></gold-cc-input>
+                    focused="{{_cardNumberFocused}}"></gold-cc-input>
         <div class="layout horizontal">
           <gold-cc-expiration-input id="creditCardExpiryDate" 
                     name="creditCardExpiryDate" 
@@ -99,18 +95,14 @@ Example:
                     required 
                     value="{{expiryDate}}" 
                     label="Expiry" 
-                    focused="{{_cardExpiryFocused}}"
-                    aon-focusin="_focusElement" 
-                    aon-focusout="_focusElement"></gold-cc-expiration-input>
+                    focused="{{_cardExpiryFocused}}"></gold-cc-expiration-input>
           <div class="spacer"></div>
           <gold-cc-cvc-input id="creditCardCvc" 
                     name="creditCardCvc" 
                     auto-validate="[[autoValidate]]" 
                     required 
                     card-type="[[cardType]]" 
-                    focused="{{_cardCvcFocused}}"
-                    aon-focusin="_focusElement" 
-                    aon-focusout="_focusElement" 
+                    focused="{{_cardCvcFocused}}" 
                     value="{{cvc}}"></gold-cc-cvc-input>
         </div>
       </div>
@@ -128,7 +120,7 @@ Example:
     properties: {
       version: {
         type: String,
-        value: 'v1.0.11'
+        value: 'v1.0.12'
       },
       _showBack: {
         type: Boolean,
